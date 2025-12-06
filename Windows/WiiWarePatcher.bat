@@ -4,6 +4,15 @@ setlocal ENABLEDELAYEDEXPANSION
 rem ---
 cd /d "%~dp0"
 set currentPath=%cd%
+
+set /a conhost_enable=0
+ver | C:\Windows\system32\findstr.exe "10.0">NUL && set /a conhost_enable=1
+
+if %conhost_enable%==1 if not "%1"=="-conhost" (
+	start conhost.exe "%~dpnx0" -conhost
+	exit /b 0
+	)
+	
 goto begin
 :begin
 if not exist "%appdata%\WiimmfiPatcher\temp\" md "%appdata%\WiimmfiPatcher\temp\"
@@ -14,14 +23,14 @@ set /a cor=0
 set /a patchingnumber=1
 set /a temperrorlev=0
 ::
-set last_build=2021/03/08
-set at=11:19
+set last_build=2025/12/06
+set at=19:38
 :: ===========================================================================
 :: WiiWare Patcher for Windows
-set version=2.2.2
+set version=2.3.0
 :: AUTHORS: KcrPL,
 :: ***************************************************************************
-:: Copyright (c) 2021 RiiConnect24, and it's (Lead) Developers
+:: Copyright (c) 2021-2025 KcrPL
 :: ===========================================================================
 
 @echo off
@@ -38,8 +47,8 @@ set /a Update_Activate=1
 set /a whatsnew=1
 set /a offlinestorage=0
 :: set FilesHostedOn=https://raw.githubusercontent.com/KcrPL/KcrPL.github.io/master/Patchers_Auto_Update/WiiWare-Patcher
-set FilesHostedOn=https://patcher.rc24.xyz/update/WiiWare-Patcher/v1
-set FilesHostedOn_update_assistant=https://patcher.rc24.xyz/update/RiiConnect24-Patcher/v1
+set FilesHostedOn=https://kcrpl-update.app/update/WiiWare-Patcher/v1
+set FilesHostedOn_update_assistant=https://kcrpl-update.app/update/RiiConnect24-Patcher/v1
 set MainFolder=%appdata%\WiiWare-Patcher
 set TempStorage=%appdata%\WiiWare-Patcher\internet\temp
 set header=Wiimmfi WiiWarePatcher - (C) KcrPL v%version% (Updated on %last_build% at %at%)
@@ -75,7 +84,7 @@ echo             :mdmmN+`mNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM.
 echo             /mmmmN:-mNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN   Play Wii games online after Nintendo WFC shutdown!
 echo             ommmmN.:mMMMMMMMMMMMMmNMMMMMMMMMMMMMMMMMd    Press any button to continue
 echo             smmmmm`+mMMMMMMMMMNhMNNMNNMMMMMMMMMMMMMMy
-echo             hmmmmh omMMMMMMMMMmhNMMMmNNNNMMMMMMMMMMM+  (Please mail us at support@riiconnect24.net if you have problems)
+echo             hmmmmh omMMMMMMMMMmhNMMMmNNNNMMMMMMMMMMM+  (Contact me at kcrplkcrpl@gmail.com if you have problems)
 echo             mmmmms smMMMMMMMMMmddMMmmNmNMMMMMMMMMMMM:
 echo            `mmmmmo hNMMMMMMMMMmddNMMMNNMMMMMMMMMMMMM.
 echo            -mmmmm/ dNMMMMMMMMMNmddMMMNdhdMMMMMMMMMMN
@@ -163,7 +172,7 @@ echo    /---\   ERROR.
 echo   /     \  There was an error while downloading curl.
 echo  /   ^!   \ 
 echo  --------- We will now open a website that will download curl.exe.
-echo            Please move curl.exe to the folder where RiiConnect24 Patcher is and restart the patcher.
+echo            Please move curl.exe to the folder where WiiWare Patcher is and restart the patcher.
 echo.
 echo       Press any key to open download page in browser and to return to menu.
 echo ---------------------------------------------------------------------------------------------------------------------------
@@ -243,7 +252,7 @@ call curl -f -L -s --insecure "http://www.msftncsi.com/ncsi.txt">NUL
 
 		title %string78% :--        :
 
-For /F "Delims=" %%A In ('call curl -f -L -s %useragent_curl% --insecure "https://patcher.rc24.xyz/connection_test.txt"') do set "connection_test=%%A"
+For /F "Delims=" %%A In ('call curl -f -L -s %useragent_curl% --insecure "https://kcrpl-update.app/connection_test.txt"') do set "connection_test=%%A"
 	set /a temperrorlev=%errorlevel%
 	
 	if not "%connection_test%"=="OK" title %title%& goto server_dead
