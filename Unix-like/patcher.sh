@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-sharpii="https://noahpistilli.github.io/RC24_Patcher/Sharpii"
-wiiwarepatcher="https://github.com/RiiConnect24/WiiWare-Patcher/raw/master/bin/wiiwarepatcher"
-lzx="https://github.com/RiiConnect24/WiiWare-Patcher/raw/master/bin/lzx"
+sharpii="https://kcrpl-update.app/update/WiiWare-Patcher_Unix/Sharpii"
+wiiwarepatcher="https://kcrpl-update.app/update/WiiWare-Patcher_Unix/bin/wiiwarepatcher"
+lzx="https://kcrpl-update.app/update/WiiWare-Patcher_Unix/bin/lzx"
 
 # Detect architecture to download the correct binary for sharpii, lzx and wiiwarepatcher
 kernel="$(uname -s)"
@@ -85,4 +85,4 @@ done
 printf "Done\n\n"
 printf "The wads are patched. They're in the wiimmfi-wads directory\n"
 printf "The original wads are in backup-wads.\n"
-printf "Thank you for using the Auto WiiWare Patcher.\n"
+printf "Thank you for using WiiWare Patcher.\n"
